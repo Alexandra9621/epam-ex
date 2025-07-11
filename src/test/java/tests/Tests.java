@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 
-public class LoginTests extends BaseTest {
+public class Tests extends BaseTest {
 
     @Test
     public void testValidLogin() {
