@@ -8,6 +8,7 @@ saucedemo-at/.idea/modules.xml
 saucedemo-at/.idea/jarRepositories.xml
 saucedemo-at/.idea/compiler.xml
 saucedemo-at/.idea/libraries/
+saucedemo-at/.idea/*
 *.iws
 *.iml
 *.ipr
