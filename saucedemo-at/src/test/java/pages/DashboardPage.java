@@ -1,7 +1,6 @@
 package pages;
 
 import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,57 +60,40 @@ public class DashboardPage extends AbstractPageFactory {
 
     @Override
     public DashboardPage openPage(String url) {
-        logger.info("Opening the page with url: {}", url);
         getDriver().get(url);
-        logger.debug("The page was opened successfully");
         return this;
     }
 
     public String getDashboardTitle() {
-        try {
-            TestUtil.waitForVisibility(getDriver(), dashboardTitle, 3);
-            String title = dashboardTitle.getText();
-            logger.info("Dashboard title found: {}", title);
-            return title;
-        } catch (Exception exception) {
-            logger.error("Dashboard title element not visible within timeout", exception);
-            throw exception;
-        }
+        TestUtil.waitForVisibility(getDriver(), dashboardTitle, 3);
+        return dashboardTitle.getText();
     }
 
 
     public DashboardPage addItemsToCart() {
-        try {
-            backPackItem.click();
-            logger.info("Backpack item added to cart.");
+        backPackItem.click();
+        logger.info("Backpack item added to cart.");
 
-            bikeLightItem.click();
-            logger.info("Bike light item added to cart.");
+        bikeLightItem.click();
+        logger.info("Bike light item added to cart.");
 
-            fleeceJacketItem.click();
-            logger.info("Fleece jacket item added to cart.");
+        fleeceJacketItem.click();
+        logger.info("Fleece jacket item added to cart.");
 
-            boltTShirtItem.click();
-            logger.info("Bolt t-shirt item added to cart.");
-        } catch (Exception e) {
-            logger.error("Failed to add items to cart", e);
-            throw e;
-        }
+        boltTShirtItem.click();
+        logger.info("Bolt t-shirt item added to cart.");
         return this;
     }
 
     public DashboardPage goToCart() {
         cartIcon.click();
-        logger.info("Navigating to cart page.");
         return this;
     }
 
     public List<String> getCartItemsNames() {
-        List<String> itemNames = cartItems.stream()
+        return cartItems.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
-        logger.info("Items currently in the cart: {}", itemNames);
-        return itemNames;
     }
 
     public DashboardPage removeItems() {
@@ -124,19 +106,16 @@ public class DashboardPage extends AbstractPageFactory {
 
     public DashboardPage goBackToItems() {
         continueShoppingButton.click();
-        logger.info("Clicking 'Continue Shopping' button.");
         return this;
     }
 
     public DashboardPage addOnesieItemToCart() {
         onesieItem.click();
-        logger.info("Adding onesie item to cart.");
         return this;
     }
 
     public DashboardPage goToCheckout() {
         checkoutButton.click();
-        logger.info("Proceeding to checkout page.");
         return this;
     }
 }

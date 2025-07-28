@@ -7,8 +7,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
 
+    //Singleton Pattern
+    private static WebDriver driver;
 
-    public static WebDriver getWebDriver() {
+    private DriverManager() {
+
+    }
+
+    public static WebDriver getDriver() {
+        if(driver == null) {
+            driver = initializeDriver();
+        }
+        return driver;
+    }
+
+    //Factory Method pattern
+    private static WebDriver initializeDriver() {
         String browser = System.getProperty("browser");
         if ("chrome".equals(browser)) {
             return new ChromeDriver();
@@ -21,6 +35,6 @@ public class DriverManager {
         if ("edge".equals(browser)) {
             return new EdgeDriver();
         }
-        return new FirefoxDriver();
+        return new ChromeDriver();
     }
 }

@@ -10,19 +10,19 @@ public class Tests extends BaseTest {
 
     @Test
     public void testValidLogin() {
-        loginPage
+        loggingLoginPageDecorator
                 .openPage("https://www.saucedemo.com/")
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginButton();
-        Assert.assertEquals(dashboardPage.getDashboardTitle(), "Swag Labs");
-        List<String> initialItemsNames = dashboardPage.addItemsToCart()
+        Assert.assertEquals(loggingDashboardPageDecorator.getDashboardTitle(), "Swag Labs");
+        List<String> initialItemsNames = loggingDashboardPageDecorator.addItemsToCart()
                      .goToCart()
                     .getCartItemsNames();
-       List<String> currentCartItems = dashboardPage.removeItems()
+       List<String> currentCartItems = loggingDashboardPageDecorator.removeItems()
                 .getCartItemsNames();
         Assert.assertNotEquals(currentCartItems, initialItemsNames);
-        dashboardPage
+        loggingDashboardPageDecorator
                 .goBackToItems()
                 .addOnesieItemToCart()
                 .goToCart()
