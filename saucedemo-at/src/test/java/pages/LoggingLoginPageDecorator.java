@@ -6,7 +6,7 @@ import org.openqa.selenium.TimeoutException;
 
 public class LoggingLoginPageDecorator {
 
-    private static final Logger logger = LogManager.getLogger(LoginPage.class);
+    private static final Logger logger = LogManager.getLogger(LoggingLoginPageDecorator.class);
     private final LoginPage loginPage;
 
     public LoggingLoginPageDecorator(LoginPage loginPage) {

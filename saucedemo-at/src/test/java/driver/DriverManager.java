@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import utilities.EnvironmentProperties;
+
+import java.util.Properties;
 
 public class DriverManager {
 
@@ -23,7 +26,8 @@ public class DriverManager {
 
     //Factory Method pattern
     private static WebDriver initializeDriver() {
-        String browser = System.getProperty("browser");
+        String browser = EnvironmentProperties.getProperties().getProperty("browser");
+        Properties a = EnvironmentProperties.getProperties();
         if ("chrome".equals(browser)) {
             return new ChromeDriver();
         }
