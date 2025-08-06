@@ -75,9 +75,8 @@ public class LoggingDashboardPageDecorator {
         return this;
     }
 
-    public LoggingDashboardPageDecorator goToCheckout() {
+    public void goToCheckout() {
         dashboardPage.goToCheckout();
         logger.info("Proceeding to checkout page.");
-        return this;
     }
 }

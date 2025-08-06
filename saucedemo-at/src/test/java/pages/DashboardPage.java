@@ -70,7 +70,7 @@ public class DashboardPage extends AbstractPageFactory {
     }
 
 
-    public DashboardPage addItemsToCart() {
+    public void addItemsToCart() {
         backPackItem.click();
         logger.info("Backpack item added to cart.");
 
@@ -82,12 +82,10 @@ public class DashboardPage extends AbstractPageFactory {
 
         boltTShirtItem.click();
         logger.info("Bolt t-shirt item added to cart.");
-        return this;
     }
 
-    public DashboardPage goToCart() {
+    public void goToCart() {
         cartIcon.click();
-        return this;
     }
 
     public List<String> getCartItemsNames() {
@@ -96,26 +94,22 @@ public class DashboardPage extends AbstractPageFactory {
                 .collect(Collectors.toList());
     }
 
-    public DashboardPage removeItems() {
+    public void removeItems() {
         logger.info("Removing backpack item from cart.");
         removeButtonForBackPackItem.click();
         logger.info("Removing bike light item from cart.");
         removeButtonForBikeLight.click();
-        return this;
     }
 
-    public DashboardPage goBackToItems() {
+    public void goBackToItems() {
         continueShoppingButton.click();
-        return this;
     }
 
-    public DashboardPage addOnesieItemToCart() {
+    public void addOnesieItemToCart() {
         onesieItem.click();
-        return this;
     }
 
-    public DashboardPage goToCheckout() {
+    public void goToCheckout() {
         checkoutButton.click();
-        return this;
     }
 }

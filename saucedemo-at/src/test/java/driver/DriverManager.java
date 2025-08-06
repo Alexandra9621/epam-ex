@@ -1,5 +1,6 @@
 package driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -18,7 +19,7 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-        if(driver == null) {
+        if (driver == null) {
             driver = initializeDriver();
         }
         return driver;
@@ -26,19 +27,18 @@ public class DriverManager {
 
     //Factory Method pattern
     private static WebDriver initializeDriver() {
-        String browser = EnvironmentProperties.getProperties().getProperty("browser");
-        Properties a = EnvironmentProperties.getProperties();
-        if ("chrome".equals(browser)) {
-            return new ChromeDriver();
-        }
-
-        if ("firefox".equals(browser)) {
-            return new FirefoxDriver();
-        }
-
-        if ("edge".equals(browser)) {
-            return new EdgeDriver();
-        }
-        return new ChromeDriver();
+        return switch (EnvironmentProperties.getProperties().getProperty("browser")) {
+            case "firefox" -> {
+                WebDriverManager.firefoxdriver().setup();
+                yield new FirefoxDriver();
+            }
+            case "chrome" -> {
+                WebDriverManager.chromedriver().setup();
+                yield new ChromeDriver();
+            }
+            default ->
+                    throw new IllegalArgumentException("Unsupported browser specified: " + System.getProperty("browser") +
+                            ". Valid options are 'chrome', 'firefox', or 'edge'.");
+        };
     }
 }

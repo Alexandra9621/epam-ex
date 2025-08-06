@@ -7,9 +7,9 @@ import org.openqa.selenium.TimeoutException;
 public class LoggingLoginPageDecorator {
 
     private static final Logger logger = LogManager.getLogger(LoggingLoginPageDecorator.class);
-    private final LoginPage loginPage;
+    private final LoginPageImpl loginPage;
 
-    public LoggingLoginPageDecorator(LoginPage loginPage) {
+    public LoggingLoginPageDecorator(LoginPageImpl loginPage) {
         this.loginPage = loginPage;
     }
 
@@ -45,7 +45,7 @@ public class LoggingLoginPageDecorator {
         return this;
     }
 
-    public LoggingLoginPageDecorator clickLoginButton() {
+    public void clickLoginButton() {
         try {
             logger.info("Clicking login button.");
             loginPage.clickLoginButton();
@@ -54,6 +54,5 @@ public class LoggingLoginPageDecorator {
             throw exception;
         }
         logger.debug("Login button clicked successfully.");
-        return this;
     }
 }

@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import model.User;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -13,12 +14,14 @@ import java.util.List;
 @Listeners(TestListener.class)
 public class Tests extends BaseTest {
 
-    @Test(groups = {"regression"})
+
+    @Test(groups = {"regression", "smoke"})
     public void testValidLogin() {
+        final User user= new User(EnvironmentProperties.getProperties().getProperty("username"), EnvironmentProperties.getProperties().getProperty("password"));
         loggingLoginPageDecorator
                 .openPage(EnvironmentProperties.getProperties().getProperty("url"))
-                .enterUsername(EnvironmentProperties.getProperties().getProperty("username"))
-                .enterPassword(EnvironmentProperties.getProperties().getProperty("password"))
+                .enterUsername(user.getUsername())
+                .enterPassword(user.getPassword())
                 .clickLoginButton();
         Assert.assertEquals(loggingDashboardPageDecorator.getDashboardTitle(), "Swag Labs");
         List<String> initialItemsNames = loggingDashboardPageDecorator.addItemsToCart()
