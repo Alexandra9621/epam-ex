@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss}] %-5level %msg%n"/>
-        </Console>
-
-        <File name="FileLogger" fileName="target/logs/test-report.log" append="false">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %msg%n"/>
-        </File>
-    </Appenders>
-
-    <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="FileLogger"/>
-        </Root>
-    </Loggers>
-</Configuration>
+<configuration>
+    <properties>
+        <property name="pattern">[%d{HH:mm:ss}] %-5p (%F:%L) - %m%n</property>
+    </properties>
+    <appenders>
+        <ReportPortalLog4j2Appender name="ReportPortalAppender">
+            <PatternLayout pattern="${pattern}"/>
+        </ReportPortalLog4j2Appender>
+    </appenders>
+    <loggers>
+        <root level="all">
+            <appender-ref ref="ReportPortalAppender"/>
+        </root>
+    </loggers>
+</configuration>

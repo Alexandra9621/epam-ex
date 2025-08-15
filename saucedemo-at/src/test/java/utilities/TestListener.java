@@ -1,5 +1,6 @@
 package utilities;
 
+import com.epam.reportportal.message.ReportPortalMessage;
 import driver.DriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +20,16 @@ public class TestListener implements ITestListener {
     private static final Logger logger = LogManager.getLogger(TestListener.class);
 
     @Override
+    public void onTestSuccess(ITestResult result) {
+        takeScreenshot(result);
+    }
+
+    @Override
     public void onTestFailure(ITestResult result) {
+        takeScreenshot(result);
+    }
+
+    private void takeScreenshot(ITestResult result) {
         WebDriver driver = DriverManager.getDriver(); // Get driver from your singleton
 
         if (driver != null) {
@@ -31,10 +41,18 @@ public class TestListener implements ITestListener {
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(srcFile, new File(screenshotPath));
+                attachScreenshotExample(screenshotPath);
                 logger.error("Test '{}' FAILED. Screenshot saved at: {}", methodName, screenshotPath);
             } catch (IOException e) {
                 logger.error("Failed to save screenshot for test '{}'", methodName, e);
             }
         }
     }
+
+    public void attachScreenshotExample(String source) throws IOException {
+        String rp_message = "Attaching file from %s".formatted(source);
+        ReportPortalMessage message = new ReportPortalMessage(new File(source), rp_message);
+        logger.info(message);
+    }
+
 }
