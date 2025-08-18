@@ -1,1 +1,1 @@
-com.epam.reportportal.testng.ReportPortalTestNGListener
+org.testng.reporters.JUnitReportReporter

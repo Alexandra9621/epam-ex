@@ -1,7 +1,7 @@
-package utilities;
+package org.example.utilities;
 
 import com.epam.reportportal.message.ReportPortalMessage;
-import driver.DriverManager;
+import org.example.driver.DriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

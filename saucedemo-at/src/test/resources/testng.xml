@@ -25,4 +25,15 @@
         </packages>
     </test>
 
+    <test name="TestRunner1">
+        <classes>
+            <class name="org.example.runner.TestRunner" />
+        </classes>
+    </test>
+    <test name="TestRunner2">
+        <classes>
+            <class name="org.example.runner.TestRunner" />
+        </classes>
+    </test>
+
 </suite>

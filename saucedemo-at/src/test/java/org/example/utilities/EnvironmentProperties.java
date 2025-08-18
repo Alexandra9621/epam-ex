@@ -1,4 +1,4 @@
-package utilities;
+package org.example.utilities;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +19,7 @@ public class EnvironmentProperties {
         if (properties.isEmpty()) {
             String configFile = System.getProperty("config-file");
             if (configFile == null) {
-                configFile= "chrome-qa1.properties";
+                configFile= "firefox-qa2.properties";
             }
             logger.info("Loading configuration from file: {}", configFile);
             try (FileInputStream input = new FileInputStream("src/test/resources/" + configFile)) {
